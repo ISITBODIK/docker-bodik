@@ -7,5 +7,6 @@
 * Open Knowledge International が作成したdocker-composeファイルを一部修正
   * https://github.com/okfn/docker-ckan
 
-* JTSのライブラリはLGPL
+* JTSライブラリのライセンスはLGPL
   * https://sourceforge.net/projects/jts-topo-suite/
+  

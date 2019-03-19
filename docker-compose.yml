@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-
+  
   ckan:
     container_name: ckan
     build:
@@ -17,7 +17,8 @@ services:
       - "0.0.0.0:${CKAN_PORT}:5000"
     volumes:
       - ckan_storage:/var/lib/ckan
-
+    environment:
+      - VIRTUAL_HOST=ckan.localhost
   datapusher:
     container_name: datapusher
     build:
@@ -47,6 +48,15 @@ services:
     container_name: redis
     image: redis:alpine
 
+  nginx-proxy:
+    build: nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      #- "443:443"
+    volumes:
+      # - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 volumes:
   ckan_storage:
   pg_data:

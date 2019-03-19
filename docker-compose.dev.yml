@@ -18,6 +18,8 @@ services:
     volumes:
       - ./ckanext:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
+    environment:
+      - VIRTUAL_HOST=seminar0.bodic.org
 
   datapusher:
     container_name: datapusher
@@ -45,6 +47,16 @@ services:
   redis:
     container_name: redis
     image: redis:alpine
+
+  nginx-proxy:
+    build: nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      #- "443:443"
+    volumes:
+      # - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 volumes:
   ckan_storage:
   pg_data:
